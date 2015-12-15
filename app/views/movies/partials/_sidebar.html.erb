@@ -1,0 +1,9 @@
+<div class="col-sm-3">
+  <div class="list-group">
+  	<h4>Catégories</h4>
+  	<hr>
+  	<% @categories.each do |category|%>
+    <%= link_to(category.name, category_path(category), class: "list-group-item") %> 
+    <% end %>
+  </div>
+</div>

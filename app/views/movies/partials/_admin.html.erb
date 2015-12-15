@@ -1,0 +1,25 @@
+<h3>Liste des films <%= link_to("+ Ajouter un film", new_movie_path , :class=>"btn btn-primary pull-right") %></h3>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+    	<th>id</th>
+      <th>Name</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie|%>
+    <tr>
+      <td><%= movie.id %></td>
+     	<td><%= movie.title %></td>
+     	<td colspan="8"></td>
+      <td>
+      	<%= link_to 'Voir', movie, :class=> "btn btn-primary" %>
+      	<%= link_to 'Editer', edit_movie_path(movie), :class=>"btn btn-info" %>
+      	<%= link_to 'Supprimer', movie, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

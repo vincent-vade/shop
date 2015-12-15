@@ -1,0 +1,9 @@
+<%#= fa_icon "camera-retro", text: "Take a photo" %>
+<%= link_to cart_path, class: "btn btn-link cart-text" do %>
+<%= fa_icon "shopping-cart" %>
+<span class="badge">
+	<%= "#{current_order.order_items.size}" %>
+</span>
+<%#= (#{number_to_currency current_order.subtotal})%>
+<% end %>
+

@@ -1,0 +1,42 @@
+<div class="jumbotron">
+	<h1>
+		Admin Dashboard 
+	</h1> 	
+	<h4>
+		Bienvenue <%= current_admin.email %>
+		<small>
+			<%= link_to "Déconnexion", destroy_admin_session_path, method: :delete, :class=> "btn btn-danger pull-right" %>
+		</small>
+	</h4>
+</div>
+
+
+<hr>
+<%# nav %>
+<ul class="nav nav-tabs">
+  <li class="active"><%= link_to 'Films', "#movies", :data=>{:toggle=> "tab"} %></li>
+  <li><%= link_to 'Catégories', "#categories", :data=>{:toggle=> "tab"}  %></li>
+  <li><%= link_to 'Utilisateurs', "#users", :data=>{:toggle=> "tab"}  %></li>
+  <li><%= link_to 'commandes', "#command", :data=>{:toggle=> "tab"}  %></li>
+</ul>
+
+<%# content admin%>
+<div class="tab-content">
+	<%# list all movies %>
+  <div id="movies" class="tab-pane fade in active">
+  	<%= render "movies/partials/admin", movies: @movies %>
+  </div>
+  <%# list all categories %>
+  <div id="categories" class="tab-pane fade">
+  	<%= render "categories/partials/admin", categories: @categories %>
+  </div>
+  <%# list all users %>
+  <div id="users" class="tab-pane fade">
+    <%= render "admin/partials/users", users: @users %>
+  </div>
+  <%# list all comamnds %>
+  <div id="commands" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <p>Some content in menu 2.</p>
+  </div>
+</div>

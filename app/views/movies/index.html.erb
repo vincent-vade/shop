@@ -1,0 +1,54 @@
+<div class="well">
+  <div class="row">
+  	<div class="col-lg-6">
+		  <%= form_tag(movies_path, :method => "get", id: "search-form", role: "search") do %>
+		  	<div class="input-group">
+			  	<%= text_field_tag :search, params[:search], placeholder: "Trouver un film", class: "form-control" %>
+			  	<span class="input-group-btn">
+				  	<%= button_tag :class=> "btn btn-default" do %>
+					  	<%= fa_icon "search" %>
+					  <% end %>
+			  	</span>
+		  	</div>
+			<% end %>
+  	</div>
+	  <div class="col-lg-6">
+	    <div class="input-group">
+	      <div class="input-group-btn">
+	        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trier par : <span class="caret"></span></button>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">Action</a></li>
+	          <li><a href="#">Another action</a></li>
+	          <li><a href="#">Something else here</a></li>
+	          <li role="separator" class="divider"></li>
+	          <li><a href="#">Separated link</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </div>
+  </div>
+</div>
+
+<%# content %>
+<div class="row">
+	<div class="col-sm-9">
+		<div class="row">
+			<%# all movies %>
+	  	<% if @movies.present? %>
+	  		<% @movies.each do |movie| %>
+			  	<%= render "movies/partials/movie", movie: movie %>
+			  <% end %>
+			<% else %>
+			  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+			<% end %>
+		</div>
+	  <%# paginate %>
+	  <div class="row text-center">
+	  	<%#= will_paginate @movies, renderer: BootstrapPagination::Rails  %>
+	  </div>
+	</div>
+	<%= render "movies/partials/sidebar" %>
+</div>
+
+
+<%# sidebar%>

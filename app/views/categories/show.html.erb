@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+	<div id="movies" class="col-sm-9">
+		<h4><%= @category.name.capitalize %></h4>
+		<hr>
+		<div class="row">
+			<% @movies.each do |movie| %>
+			<%= render "movies/partials/movie", movie: movie %>
+			<% end %>
+		</div>
+	</div>
+	<%= render "movies/partials/sidebar", categories: @categories %>
+</div>
