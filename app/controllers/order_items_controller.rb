@@ -23,4 +23,7 @@ class OrderItemsController < ApplicationController
 	  def order_item_params
 	    params.require(:order_item).permit(:quantity, :movie_id)
 	  end
+    def find_cart
+      session[:cart] ||= Cart.new
+    end
 end

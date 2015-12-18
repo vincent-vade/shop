@@ -1,15 +1,36 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  has_scope :recent
+  has_scope :released_desc
+  has_scope :released_asc
+  has_scope :price_max
+  has_scope :prix_mib
 
-  # GET /movies
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  # GET /movies_url
   # GET /movies.json
   def index
-    @movies = Movie.all
+    #get all catégories
     @categories = Category.all
+    #if params search
     if params[:search]
-      @movies = Movie.search(params[:search]).order("created_at DESC")
+      @movies = Movie.search(params[:search]).order("created_at DESC")    
     else
-      @movies = Movie.all.order('created_at DESC')
+      #filter by 
+      case params[:filter]
+      when "Ajout récent" 
+        @movies = Movie.recent
+      when "Par date décroisssante"
+        @movies = Movie.released_desc
+      when "Par date croisssante"
+        @movies = Movie.released_asc
+      when "Prix min"
+        @movies = Movie.price_min(25)
+      when "Prix max"
+        @movies = Movie.price_max(30)
+      #else get all movies not filtered
+      else
+        @movies = apply_scopes(Movie).all
+      end
     end
   end
 

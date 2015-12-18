@@ -9,11 +9,11 @@
 <% end %>
 <% if @order_items.size == 0 %>
   <h3 class="text-center">
-    Vous avez aucun produit dans votre panier<br><br>
+    Votre panier est vide<br><br>
     <%= link_to "Retour à l'accueil", root_path, :class=> "btn btn-primary" %>
   </h3>
 <% else %>
-  <% @order_items.each do |order_item| %>
-    <%= render 'carts/cart_row', movie: order_item.movie, order_item: order_item, show_total: true %>
-  <% end %>
+  <h3>Mon panier</h3>
+  <hr>
+  <%= render "carts/partials/carts"%>
 <% end %>

@@ -1,0 +1,27 @@
+<tr>
+  <td>
+    <%= link_to(movie_path(movie)) do %>
+      <%= movie.title %>
+      <%= image_tag(movie.image.thumb, class: "img-responsive", style: "max-width: 25%;") %>
+    <% end %>
+  </td>
+  <td>    
+    <%= form_for order_item, remote: true do |f| %>
+      <div class="row">
+        <div class="col-xs-4">
+          <%= f.number_field :quantity, value: order_item.quantity.to_i, class: "form-control", min: 1 %>
+          <%= f.hidden_field :movie_id, value: movie.id %>
+        </div>
+        <div class="col-xs-8 text-right">
+          <div class="btn-group">
+            <%= f.submit "Modifier la quantité", class: "btn btn-primary" %>
+            <%= link_to "Supprimer", order_item, { data: { confirm: "Êtes-vous sur de vouloir de supprimer '#{order_item.movie.title}' de votre panier?" }, method: :delete, remote: true, class: "btn btn-danger" } %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </td>
+  <td>
+    <span><%= number_to_currency order_item.unit_price %> <br><small>à l'unité</small></span>
+  </td>
+</tr>

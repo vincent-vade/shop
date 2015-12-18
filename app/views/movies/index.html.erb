@@ -14,16 +14,12 @@
   	</div>
 	  <div class="col-lg-6">
 	    <div class="input-group">
+	    <%filter = [ "Tout", "Ajout Récent", "Par date décroisssante", "Par date croisssante", "Prix max", "Prix min"]%>
 	      <div class="input-group-btn">
-	        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trier par : <span class="caret"></span></button>
-	        <ul class="dropdown-menu">
-	          <li><a href="#">Action</a></li>
-	          <li><a href="#">Another action</a></li>
-	          <li><a href="#">Something else here</a></li>
-	          <li role="separator" class="divider"></li>
-	          <li><a href="#">Separated link</a></li>
-	        </ul>
-	      </div>
+	        <%= form_tag movies_path, :method => 'get', :id=> "select-filter" do %>  
+					  <%= select_tag "filter", options_for_select(filter, params[:filter]), class: 'filter form-control' %>
+					<% end %>
+	      </div>	
 	    </div>
 	  </div>
   </div>
@@ -32,20 +28,21 @@
 <%# content %>
 <div class="row">
 	<div class="col-sm-9">
-		<div class="row">
+		<div class="row movies">
 			<%# all movies %>
 	  	<% if @movies.present? %>
 	  		<% @movies.each do |movie| %>
 			  	<%= render "movies/partials/movie", movie: movie %>
 			  <% end %>
 			<% else %>
-			  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+			  <blockquote>
+			  	<p>
+			  		Il n'y a aucun film correspondant à votre recherche 
+			  		<strong><mark><%= params[:search] %></mark>.</strong>
+			  	</p>
+				</blockquote>
 			<% end %>
 		</div>
-	  <%# paginate %>
-	  <div class="row text-center">
-	  	<%#= will_paginate @movies, renderer: BootstrapPagination::Rails  %>
-	  </div>
 	</div>
 	<%= render "movies/partials/sidebar" %>
 </div>

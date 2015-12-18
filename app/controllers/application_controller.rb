@@ -8,12 +8,17 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if !session[:order_id].nil?
-      Order.find(session[:order_id])
+      Order.find(session[:order_id])  
     else
       Order.new
     end
   end
-
+  def find_cart
+    unless session[:cart]
+      session[:cart] = new
+    end
+    session[:cart]
+  end
   private
 	  # Get all category
 	  def set_category

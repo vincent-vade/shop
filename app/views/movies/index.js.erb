@@ -1,0 +1,8 @@
+$('#select-filter').on('change', function() {
+	  $.ajax({ type: "GET",   
+			url: "<%= movies_path %>",  
+			success : function(text) {
+				return $(this).parents('form').submit();
+			}
+	  });
+	});

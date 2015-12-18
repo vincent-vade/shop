@@ -1,27 +1,20 @@
-<p id="notice"><%= notice %></p>
-<div class="col-md-4">
-  <%= image_tag(@movie.image, :class=>"img-responsive") %>
-</div>
-<div class="col-md-8">
-  <h3 class="pull-right"><%= number_to_currency @movie.price, locale: :fr %> <small>Prix à l'unité</small></h3>
-  <h2><%= @movie.title %> <small><%= @movie.category.name %></small></h2>
-  <hr>
+<div class="row">
+  <div class="col-md-4">
+    <%= image_tag(@movie.image, :class=>"img-responsive") %>
+  </div>
+  <div class="col-md-8">
+    <h3 class="pull-right"><%= number_to_currency @movie.price, locale: :fr %> <small>Prix à l'unité</small></h3>
+    <h2><%= @movie.title %> <small><%= @movie.category.name %></small></h2>
+    <hr>
+    <%= render "movies/partials/add_to_cart", order_item: @order_item %>
+    <%= @movie.released_year %>
+    <p><%= @movie.description %></p>
+  </div>
 
-  <%= form_for @order_item, remote: true do |f| %>
-    <div class="input-group">
-      <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
-      <div class="input-group-btn">
-        <%= f.hidden_field :movie_id, value: @movie.id %>
-        <%= f.submit "Ajouter au panier", class: "btn btn-primary" %>
-      </div>
-    </div>
+  <% if current_user.try(:admin?) %>
+  <%= link_to 'Edit', edit_movie_path(@movie), :class=> "btn btn-info" %> |
+  <%= link_to 'Back', movies_path %>
   <% end %>
-  <%= @movie.released_year %>
-  <p><%= @movie.description %></p>
 </div>
 
-<% if current_user.try(:admin?) %>
-<%= link_to 'Edit', edit_movie_path(@movie), :class=> "btn btn-info" %> |
-<%= link_to 'Back', movies_path %>
-<% end %>
 

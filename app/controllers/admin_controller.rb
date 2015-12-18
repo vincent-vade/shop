@@ -5,4 +5,5 @@ class AdminController < ApplicationController
   	@movies = Movie.order('title DESC').all
   	@users = User.all
   end
+  
 end

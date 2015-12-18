@@ -1,0 +1,9 @@
+  <%= form_for @order_item, remote: true do |f| %>
+    <div class="input-group">
+      <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+      <div class="input-group-btn">
+        <%= f.hidden_field :movie_id, value: @movie.id %>
+        <%= f.submit "Ajouter au panier", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>

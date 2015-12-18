@@ -1,0 +1,23 @@
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>titre</th>
+      <th>quantité</th>
+      <th>prix</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @order_items.each do |order_item| %>
+    <%= render 'carts/partials/cart_row', movie: order_item.movie, order_item: order_item %>
+  <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3" class="text-right">        
+        <h4>Prix total:</h4>
+        <span><%= number_to_currency current_order.subtotal%></span>
+      </td>
+    </tr>
+  </tfoot>
+</table> 
+<%= link_to("valider mon panier", carts_validate_path , class: "btn btn-primary pull-right") %>
