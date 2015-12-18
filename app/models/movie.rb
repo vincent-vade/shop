@@ -12,8 +12,6 @@ class Movie < ActiveRecord::Base
 
 
 	mount_uploader :image, ImageUploader 
-  #scope :by_degree, -> degree { where(:degree => degree) }
-  #scope :by_period, -> started_at, ended_at { where("started_at = ? AND ended_at = ?", started_at, ended_at) }
   #for url "/id-title"
 	def to_param
 		"#{id} #{title}".parameterize
