@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217184250) do
+ActiveRecord::Schema.define(version: 20151218090709) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -33,19 +33,6 @@ ActiveRecord::Schema.define(version: 20151217184250) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "customers", force: :cascade do |t|
-    t.string   "firstname",  limit: 255
-    t.string   "lastname",   limit: 255
-    t.string   "email",      limit: 255
-    t.string   "addr1",      limit: 255
-    t.string   "addr2",      limit: 255
-    t.string   "addr3",      limit: 255
-    t.string   "postcode",   limit: 255
-    t.string   "phone",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -89,11 +76,11 @@ ActiveRecord::Schema.define(version: 20151217184250) do
     t.integer  "order_status_id", limit: 4
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
-    t.integer  "customer_id",     limit: 4
+    t.integer  "user_id",         limit: 4
   end
 
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255,   null: false
@@ -119,16 +106,16 @@ ActiveRecord::Schema.define(version: 20151217184250) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "avatar",                 limit: 255
-    t.integer  "customer_id",            limit: 4
+    t.integer  "order_id",               limit: 4
   end
 
-  add_index "users", ["customer_id"], name: "index_users_on_customer_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["order_id"], name: "index_users_on_order_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "order_items", "movies"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "orders", "customers"
   add_foreign_key "orders", "order_statuses"
-  add_foreign_key "users", "customers"
+  add_foreign_key "orders", "users"
+  add_foreign_key "users", "orders"
 end

@@ -1,9 +1,10 @@
 class MoviesController < ApplicationController
-  has_scope :recent
-  has_scope :released_desc
-  has_scope :released_asc
-  has_scope :price_max
-  has_scope :prix_mib
+  #filter
+  has_scope :recent #by most recent add
+  has_scope :released_desc #by released_years desc
+  has_scope :released_asc #by released_years asc
+  has_scope :price_max #by price_max
+  has_scope :prix_min #by price_min
 
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   # GET /movies_url
@@ -27,7 +28,7 @@ class MoviesController < ApplicationController
         @movies = Movie.price_min(25)
       when "Prix max"
         @movies = Movie.price_max(30)
-      #else get all movies not filtered
+      #else get all movies not filtered or searched
       else
         @movies = apply_scopes(Movie).all
       end

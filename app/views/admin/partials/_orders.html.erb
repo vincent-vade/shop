@@ -1,0 +1,21 @@
+<h3>Liste des utilisateurs</h3>
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+    	<th>id</th>
+      <th>Statut</th>
+      <th>Email</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order|%>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.order_status.name %></td>
+     	<td><%= order.subtotal %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

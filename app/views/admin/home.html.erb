@@ -9,15 +9,12 @@
 		</small>
 	</h4>
 </div>
-
-
-<hr>
 <%# nav %>
 <ul class="nav nav-tabs">
   <li class="active"><%= link_to 'Films', "#movies", :data=>{:toggle=> "tab"} %></li>
   <li><%= link_to 'Catégories', "#categories", :data=>{:toggle=> "tab"}  %></li>
   <li><%= link_to 'Utilisateurs', "#users", :data=>{:toggle=> "tab"}  %></li>
-  <li><%= link_to 'commandes', "#command", :data=>{:toggle=> "tab"}  %></li>
+  <li><%= link_to 'Commandes', "#commands", :data=>{:toggle=> "tab"}  %></li>
 </ul>
 
 <%# content admin%>
@@ -36,7 +33,6 @@
   </div>
   <%# list all comamnds %>
   <div id="commands" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
+    <%= render "admin/partials/orders", orders: @orders%>
   </div>
 </div>

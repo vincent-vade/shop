@@ -8,21 +8,17 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if !session[:order_id].nil?
-      Order.find(session[:order_id])  
+      @order = Order.find(session[:order_id])
     else
       Order.new
+      #current_user.orders.create
+      #session[:order] = @order.to_param
     end
-  end
-  def find_cart
-    unless session[:cart]
-      session[:cart] = new
-    end
-    session[:cart]
   end
   private
 	  # Get all category
 	  def set_category
-	  	@categories = Category.all
+	  	@categories = Category.all if @categories.nil?
 	  end
 	protected
 	  def configure_permitted_parameters

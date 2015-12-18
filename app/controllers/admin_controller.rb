@@ -4,6 +4,7 @@ class AdminController < ApplicationController
   def home
   	@movies = Movie.order('title DESC').all
   	@users = User.all
+  	@orders = Order.all
   end
   
 end

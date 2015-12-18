@@ -20,8 +20,6 @@ gem 'will_paginate-bootstrap'
 gem "font-awesome-rails"
 gem 'devise'
 gem 'has_scope', '~> 0.6.0'
-gem "rails-erd"
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
